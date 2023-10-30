@@ -1,0 +1,27 @@
+[
+  {
+    "user": "bela123",
+    "message": "Jo napom van",
+    "createdAt": "2023-09-15T15:12:24.671Z"
+  },
+  {
+    "user": "Vivi",
+    "message": "teszt",
+    "createdAt": "2023-10-29T15:19:55.484Z"
+  },
+  {
+    "user": "Péter",
+    "message": "teszt",
+    "createdAt": "2023-10-29T16:03:56.011Z"
+  },
+  {
+    "user": "Péter",
+    "message": "Lassan készen leszek",
+    "createdAt": "2023-10-29T17:05:11.621Z"
+  },
+  {
+    "user": "Péter",
+    "message": "Teszt",
+    "createdAt": "2023-10-30T17:25:50.577Z"
+  }
+]
