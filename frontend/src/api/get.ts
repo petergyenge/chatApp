@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { z } from "zod";
 
 const client = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: process.env.NODE_ENV === "development" ? "http://localhost:8080" : "https://backend-k745z.ondigitalocean.app/"
 });
 
 const getMessages = async (): Promise<AxiosResponse | null> => {
@@ -17,7 +17,8 @@ const getMessages = async (): Promise<AxiosResponse | null> => {
 const MessageSchema = z.object({
   user: z.string(),
   message: z.string(),
-  createdAt: z.string().datetime({ offset: true })
+  createdAt: z.string().datetime({ offset: true }),
+  id: z.string()
 });
 
 export type Messages = z.infer<typeof MessageSchema>;

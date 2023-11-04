@@ -14,7 +14,8 @@ const MessageRequestSchema = z.object({
 })
 
 const MessageSchema = MessageRequestSchema.extend({
-  createdAt: z.string().datetime({ offset: true })
+  createdAt: z.string().datetime({ offset: true }),
+  id: z.string()
 })
 
 router.get("/", async (req, res) => {
@@ -36,10 +37,21 @@ router.post("/", async (req, res) => {
 
   const data = await load("messages")
   const messages = MessageSchema.array().parse(data)
-  const newMessage = { ...message, createdAt: new Date().toISOString() }
+  const newMessage = { ...message, createdAt: new Date().toISOString(), id: ""+(Math.floor(Math.random() * 1000000000)) }
   await save("messages", [ ...messages, newMessage ])
 
   return res.json(newMessage)
 })
+
+router.delete("/:id", async (req, res) => {
+  const id = req.params.id;
+
+  const data = await load("messages")
+  const messagess = MessageSchema.array().parse(data)
+  let filteredIds = messagess.filter((messages) => messages.id !== id);
+  await save("messages", filteredIds)
+
+  res.sendStatus(200);
+});
 
 export { router }

@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosResponse } from "axios"
 import { z } from "zod"
 
 const client = axios.create({
-  baseURL: "http://localhost:8080"
+  baseURL: process.env.NODE_ENV === "development" ? "http://localhost:8080" : "https://backend-k745z.ondigitalocean.app/"
 })
 
 const _postMessage = async (user: string, message: string ): Promise<AxiosResponse | null> => {
