@@ -14,6 +14,7 @@ function App() {
   const [error, setError] = useState<string | null>(null);
 
 
+
   const getMessages = async () => {
     const response = await loadMessages()
     if (!response.success) {
@@ -42,20 +43,19 @@ function App() {
           <input type="text" placeholder="Type your name" className="input input-ghost w-full max-w-xs border-[#DEF2F1] rounded-lg"
             onChange={(e) => { setUserName(e.target.value) }}
           />
-                                  <span className="label-text text-[#feffff] py-2">Message</span>
-                      <input type="text" placeholder="Type your message" className="input input-ghost w-full max-w-xs border-[#DEF2F1] rounded-lg"
-              value={userMessage}
-              onChange={(e) => { setUserMessage(e.target.value) }}
-            />
-
-            {!userName || !userMessage ? <button className='btn mt-2'>Add message or User name</button> :
-              <button className="btn btn-neutral border-[#DEF2F1] mt-2"
-                onClick={() => {
-                  postMessage(userName, userMessage)
-                  setUserMessage("")
-                }}
-              >Send</button>
-            }
+          <span className="label-text text-[#feffff] py-2">Message</span>
+          <input type="text" placeholder="Type your message" className="input input-ghost w-full max-w-xs border-[#DEF2F1] rounded-lg"
+            value={userMessage}
+            onChange={(e) => { setUserMessage(e.target.value) }}
+          />
+          {!userName || !userMessage ? <button className='btn mt-2'>Add message or User name</button> :
+            <button className="btn btn-neutral border-[#DEF2F1] mt-2"
+              onClick={() => {
+                postMessage(userName, userMessage)
+                setUserMessage("")
+              }}
+            >Send</button>
+          }
         </div>
         <div className="card w-96 bg-[#17252A] shadow-xl">
           <div className="card-body">

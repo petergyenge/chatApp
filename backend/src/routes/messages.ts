@@ -47,9 +47,29 @@ router.delete("/:id", async (req, res) => {
   const id = req.params.id;
 
   const data = await load("messages")
-  const messagess = MessageSchema.array().parse(data)
-  let filteredIds = messagess.filter((messages) => messages.id !== id);
+  const messages = MessageSchema.array().parse(data)
+  let filteredIds = messages.filter((messages) => messages.id !== id);
   await save("messages", filteredIds)
+
+  res.sendStatus(200);
+});
+
+
+router.patch("/:id", async (req, res) => {
+  const id = req.params.id;
+  const newMessage = req.body.message;
+
+  const data = await load("messages")
+  const messages = MessageSchema.array().parse(data)
+  const messageIndex = messages.findIndex((message) => message.id === id);
+
+  if (messageIndex !== -1) {
+    messages[messageIndex].message = newMessage;
+    res.status(200).json({ message: 'Üzenet frissítve' });
+  } else {
+    res.status(404).json({ error: 'Nem található üzenet ezzel az azonosítóval' });
+  }
+  await save("messages", messages)
 
   res.sendStatus(200);
 });
